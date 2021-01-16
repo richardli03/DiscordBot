@@ -11,8 +11,15 @@ client.once('ready',()=>{
 
 //code here
 client.on('message', message =>{
-  if(!message.content.startsWith(prefix) || message.author.bot) return;
+  if(message.content.includes("lib")){
+      if(message.content.includes("equilibrium")||message.content.includes("library")) return;
 
+  else  {
+      message.delete();
+      message.channel.send('do not speak');
+    }
+}
+  if(!message.content.startsWith(prefix) || message.author.bot) return;
   //adding the ability to splice commands
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase()
@@ -24,6 +31,7 @@ client.on('message', message =>{
   else if(command === 'rules'){
     message.channel.send('https://bit.ly/3nZ3S3v')
   }
+
 });
 
 client.login('ODAwMDg3NzQ2ODM2Mjk5ODE3.YANBxw.nIsFfn5MmP6CAySKwezS9nSA6CE');
