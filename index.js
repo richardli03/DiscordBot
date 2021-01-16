@@ -21,7 +21,7 @@ client.on('message', message =>{
   if(command === 'hello'){
     message.channel.send('hi! I am a discord bot');
   }
-  if(command === 'rules'){
+  else if(command === 'rules'){
     message.channel.send('https://bit.ly/3nZ3S3v')
   }
 });
