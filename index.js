@@ -1,8 +1,19 @@
 const Discord = require('discord.js');
-
+const config = require('./config.json');
 const client = new Discord.Client();
-
 const prefix ='!';
+const fs = require('fs')
+
+client.commands = new Discord.Collection();
+const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
+
+for(const file of commandFiles){
+    const command = require(`./commands/${file}`);
+
+    client.commands.set(command.name, command);
+}
+
+
 
 // run node
 client.once('ready',()=>{
@@ -12,6 +23,7 @@ client.once('ready',()=>{
 //code here
 client.on('message', message =>{
   // TODO: Needs to reference a text file that can be outputted and appended at any time by moderators. That will be the list of bannable words.
+
   if(message.content.toLowerCase().includes("lib")){
       if(message.content.includes("equilibrium")||message.content.includes("library")) return;
   else  {
@@ -19,6 +31,8 @@ client.on('message', message =>{
       message.channel.send('do not speak '+ `<@${message.author.id}>`);
     }
 }
+
+
   if(!message.content.startsWith(prefix) || message.author.bot) return;
   //adding the ability to splice commands
   const args = message.content.slice(prefix.length).split(/ +/);
@@ -26,14 +40,14 @@ client.on('message', message =>{
 
 
   if(command === 'hello'){
-    message.channel.send('hi! I am a discord bot');
+    client.commands.get('hello').execute(message,args);
   }
   else if(command === 'rules'){
-    message.channel.send('https://bit.ly/3nZ3S3v')
+    client.commands.get('rules').execute(message,args);
   }
   else if(command === 'votekick')
   {
-    //
+    client.commands.get('votekick').execute(message,args);
   }
 
 });
