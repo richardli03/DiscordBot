@@ -3,6 +3,8 @@ module.exports =
 	name: 'votekick',
 	description: 'this is a votekick function!',
 	execute(message, args) {
+
+
 		if (!message.mentions.users.first()) {
 			message.delete();
 			message.channel.send('please @ somebody in order to votekick them!');

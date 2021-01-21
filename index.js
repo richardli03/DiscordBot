@@ -20,15 +20,18 @@ client.once('ready', ()=>{
 });
 
 // code here
-client.on('message', message =>{
-	// TODO: Needs to reference a text file that can be outputted and appended at any time by moderators. That will be the list of bannable words.
+client.on("message", (message) => {
 
-	if(message.content.toLowerCase().includes('lib')) {
-		if(message.content.includes('equilibrium') || message.content.includes('library')) {return;}
-		else {
-			message.delete();
-			message.channel.send('do not speak ' + `<@${message.author.id}>`);
-		}
+// First, we convert the data into an array for easier manipulation
+
+	const array1 = fs.readFileSync('del.txt').toString().split("\n");
+	const array2 = fs.readFileSync('fine.txt').toString().split("\n");
+
+// Then, we test to see if the message contains anything from the banned list that's not on the exceptions list. We also check to make sure that the bot is never deleting himself.
+
+	if (array1.includes(message.content.toLowerCase()) && !array2.includes(message.content.toLowerCase()) && !message.author.bot) {
+		message.delete();
+		message.channel.send('do not speak ' + `<@${message.author.id}>`);
 	}
 
 
@@ -47,10 +50,19 @@ client.on('message', message =>{
 	else if(command === 'votekick') {
 		client.commands.get('votekick').execute(message, args);
 	}
+	else if(command === 'cleanse') {
+		client.commands.get('cleanse').execute(message, args);
+	}
+	else if(command === 'banlistadd') {
+		client.commands.get('banlistadd').execute(message, args);
+	}
+	else if(command === 'okaylistadd') {
+		client.commands.get('okaylistadd').execute(message, args);
+	}
 	else if(command === 'test') {
 		client.commands.get('test').execute(message, args);
 	}
 
 });
 
-client.login('ODAwMDg3NzQ2ODM2Mjk5ODE3.YANBxw.nIsFfn5MmP6CAySKwezS9nSA6CE');
+client.login(config.token);
