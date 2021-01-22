@@ -20,18 +20,24 @@ client.once('ready', ()=>{
 });
 
 // code here
-client.on("message", (message) => {
+client.on('message', (message) => {
 
-// First, we convert the data into an array for easier manipulation
+	// First, we convert the data into an array for easier manipulation
+	const array1 = fs.readFileSync('del.txt').toString('utf-8').split('\n');
+	const array2 = fs.readFileSync('fine.txt').toString().split('\n');
 
-	const array1 = fs.readFileSync('del.txt').toString().split("\n");
-	const array2 = fs.readFileSync('fine.txt').toString().split("\n");
-
-// Then, we test to see if the message contains anything from the banned list that's not on the exceptions list. We also check to make sure that the bot is never deleting himself.
-
-	if (array1.includes(message.content.toLowerCase()) && !array2.includes(message.content.toLowerCase()) && !message.author.bot) {
-		message.delete();
-		message.channel.send('do not speak ' + `<@${message.author.id}>`);
+	// We check to make sure that the bot is never deleting himself.
+	if (message.author.bot) {return;}
+	// We make sure the message author is not an admin
+	else if (!message.member.roles.cache.has('801294203971305483')) {
+		// Then, we test to see if the message contains anything from the banned list that's not on the exceptions list.
+		for (let n = 0; n < array1.length - 1; n++) {
+			if (message.content.toLowerCase().includes(array1[n]) && !array2.includes(message.content.toLowerCase())) {
+				message.delete();
+				message.channel.send('do not speak ' + `<@${message.author.id}>`);
+				break;
+			}
+		}
 	}
 
 

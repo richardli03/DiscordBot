@@ -7,7 +7,7 @@ module.exports =
 
 		const fs = require('fs');
 
-		fs.appendFileSync('del.txt', '\n' + args[0] );
+		fs.appendFileSync('del.txt', args[0] + '\n');
 
 	},
 };

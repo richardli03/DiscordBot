@@ -1,4 +1,3 @@
-LIST OF BANNED TERMS
 lib
-
-vetri
+toxic
+test
