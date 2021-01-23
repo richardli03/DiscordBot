@@ -17,3 +17,6 @@ Nightbot already basically does this, but this is learning for me!
 Spam filter (autodelete messages that occur too many times)
 
 3 strike system.
+
+
+BTW // on the off chance you're maliciously trying to steal the token from the initial commit, it's changed :)
