@@ -11,6 +11,6 @@ module.exports =
 			return;
 		}
 		const mentionedUser = message.mentions.users.first();
-		message.channel.send(`Hi i recieved your command. This is the user that will be kicked in the future: ${mentionedUser.username}`);
+		message.channel.send(`Hi, I recieved your command. This is the user that will be kicked in the future: ${mentionedUser.username}`);
 	},
 };

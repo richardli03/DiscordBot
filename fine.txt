@@ -1,3 +1,1 @@
-equilibrium
-liberty
-testy
+testa

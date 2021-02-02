@@ -56,8 +56,8 @@ client.on('message', (message) => {
 	else if(command === 'votekick') {
 		client.commands.get('votekick').execute(message, args);
 	}
-	else if(command === 'cleanse') {
-		client.commands.get('cleanse').execute(message, args);
+	else if(command === 'ls') {
+		client.commands.get('ls').execute(message, args);
 	}
 	else if(command === 'banlistadd') {
 		client.commands.get('banlistadd').execute(message, args);
